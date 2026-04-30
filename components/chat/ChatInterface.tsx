@@ -85,7 +85,7 @@ export function ChatInterface() {
     <div className="flex h-screen flex-col bg-background">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="flex items-between justify-between px-4 py-3 mx-auto">
+        <div className="flex items-center justify-between px-4 py-3 mx-auto">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-lg">
               <ShoppingBag className="h-5 w-5" />

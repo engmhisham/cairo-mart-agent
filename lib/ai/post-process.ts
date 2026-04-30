@@ -6,23 +6,20 @@ export function sanitizeResponse(text: string): string {
 
   // Remove <function=...>...</function> patterns
   result = result.replace(/<function=\w+>[\s\S]*?<\/function>/g, "");
-  // Remove <function>...</function> patterns
   result = result.replace(/<function>[\s\S]*?<\/function>/g, "");
-  // Remove standalone <function=...> tags without closing
-  result = result.replace(/<function=\w+>[^<]*/g, "");
-  // Remove any remaining <function...> tags
   result = result.replace(/<\/?function[^>]*>/g, "");
-  // Remove JSON-like tool call fragments: {"issue": "...", "contact": "..."}
-  result = result.replace(/\{"(?:issue|query|orderId|productId|contact|category)":\s*"[^"]*"(?:,\s*"(?:issue|query|orderId|productId|contact|category)":\s*"[^"]*")*\}/g, "");
+
+  // Remove JSON-like tool call fragments
+  result = result.replace(/\{"\w+":\s*"[^"]*"(?:,\s*"\w+":\s*"[^"]*")*\}/g, "");
 
   // Remove common foreign words Llama hallucinates
   const foreignWords = [
-    "hvordan", "peut-être", "peut être", "comment",
+    "hvordan", "peut-être", "peut être",
     "bitte", "por favor", "gracias", "merci", "danke",
-    "s'il vous plaît", "oui", "nein", "ja ",
   ];
   for (const word of foreignWords) {
-    result = result.replace(new RegExp(`\\b${word}\\b`, "gi"), "");
+    const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    result = result.replace(new RegExp(`\\b${escaped}\\b`, "gi"), "");
   }
 
   // Clean up leftover whitespace

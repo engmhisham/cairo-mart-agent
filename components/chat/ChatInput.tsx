@@ -41,7 +41,7 @@ export function ChatInput({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="اكتب رسالتك هنا... / Type your message..."
+          placeholder="Type your message..."
           disabled={isLoading}
           className="h-11 flex-1 rounded-xl border bg-muted/50 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 placeholder:text-muted-foreground"
         />
